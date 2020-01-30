@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import shop from '@/api/shop'
 
 Vue.use(Vuex)
 
@@ -14,10 +15,16 @@ export default new Vuex.Store({
     }
   },
 
-  actions: {
-    fetchProducts() {
+  actions: { // = methods
+    fetchProducts({ commit }) {
       // make API call
-      // run setProducts mutation
+      return new Promise((resolve, reject) => {
+        // run setProducts mutation
+        shop.getProducts(products => {
+          commit('setProducts', products)
+          resolve()
+        })
+      })
     }
   },
 
